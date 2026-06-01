@@ -12,4 +12,5 @@ import { TicketService } from '../ticket.service';
 export class Tab3Page {
 
   constructor(public ticketService: TicketService) {}
+
 }

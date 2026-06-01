@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Painel</ion-title>
+    <ion-title>Relatórios</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +13,111 @@
       {{ senha }}
     </ion-item>
   </ion-list>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resumo Geral</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        <strong>Total Emitidas:</strong>
+        {{ ticketService.getTotalEmitidas() }}
+      </p>
+
+      <p>
+        <strong>Total Atendidas:</strong>
+        {{ ticketService.getTotalAtendidas() }}
+      </p>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Por Tipo</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        SP Emitidas:
+        {{ ticketService.getEmitidasPorTipo('SP') }}
+      </p>
+
+      <p>
+        SP Atendidas:
+        {{ ticketService.getAtendidasPorTipo('SP') }}
+      </p>
+
+      <hr>
+
+      <p>
+        SG Emitidas:
+        {{ ticketService.getEmitidasPorTipo('SG') }}
+      </p>
+
+      <p>
+        SG Atendidas:
+        {{ ticketService.getAtendidasPorTipo('SG') }}
+      </p>
+
+      <hr>
+
+      <p>
+        SE Emitidas:
+        {{ ticketService.getEmitidasPorTipo('SE') }}
+      </p>
+
+      <p>
+        SE Atendidas:
+        {{ ticketService.getAtendidasPorTipo('SE') }}
+      </p>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Histórico</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-list>
+
+        <ion-item *ngFor="let ticket of ticketService.historico">
+
+          <ion-label>
+
+            <h2>{{ ticket.numero }}</h2>
+
+            <p>
+              Tipo: {{ ticket.tipo }}
+            </p>
+
+            <p>
+              Emitida:
+              {{ ticket.dataEmissao | date:'dd/MM/yyyy HH:mm' }}
+            </p>
+
+            <p *ngIf="ticket.atendida">
+              Atendida:
+              {{ ticket.dataAtendimento | date:'dd/MM/yyyy HH:mm' }}
+            </p>
+
+            <p *ngIf="!ticket.atendida">
+              Não atendida
+            </p>
+
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
